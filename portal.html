@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portal</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script  src="js/question-panel.js"></script>
+</head>
+
+<body onload="">
+
+    <div class="container-fluid">
+        <div class="row bgcolor ">
+            <div class="col-sm-6 company-marker">
+                <h1 class="pull-left">Arindam Mitra's Exam Portal</h1>
+            </div>
+            <div class="col-sm-2 timer-notification-style" id="timer-notification-style">
+                <div id="time-notification"> </div>
+                <div id = "timer-clock" class="timer-clock"> </div>
+            </div>
+            <div class="col-sm-4 account-info">
+                <h2 class="pull-right">FirstName LastName</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 bgcolor control">
+                <div class="full-height">
+                    <div><br/></div>
+                    <button class="btn btn-primary btn-block btn-large" onclick="startTest('Test 1');">Take Test 1</button>
+                    <div><br/></div>
+                    <button class="btn btn-primary btn-block btn-large"
+                            data-toggle="modal" data-target="#myModal">Result of Test 1</button>
+                    <div><br/></div>
+                    <button class="btn btn-primary btn-block btn-large">Take Test 2</button>
+                    <div><br/></div>
+                    <button class="btn btn-primary btn-block btn-large">Result of Test 2</button>
+                    <div><br/></div>
+                </div>
+            </div>
+            <div class="col-sm-9 question-panel" id="question-panel">
+                <div class="portal-welcome" id="portal-welcome">
+                    Welcome to The Portal <br>
+                    Please select an Appropriate Task from the Menu
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header bgcolor">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title">Thank You for Taking the Exam</h2>
+                </div>
+                <div class="modal-body">
+                    <h4 id="modal-body-text">Some text in the modal.</h4>
+                </div>
+                <div class="modal-footer bgcolor">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <nav class="navbar navbar-bottom footer bgcolor">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4>Copyright &copy; Arindam Mitra 2018</h4>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+</body>
+</html>

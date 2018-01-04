@@ -14,9 +14,13 @@
 html { width: 100%; height:100%; overflow:hidden; }
 
 body { 
-	width: 100%;
-	height:100%;
+	/*width: 100%;*/
+	/*height:100%;*/
 	font-family: 'Open Sans', sans-serif;
+	overflow: hidden;
+	}
+
+.bgcolor {
 	background: #092756;
 	background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
 	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
@@ -24,7 +28,9 @@ body {
 	background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
 	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+
 }
+
 .login { 
 	position: absolute;
 	top: 50%;
@@ -35,8 +41,12 @@ body {
 }
 .login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; font-weight:bold; }
 
+.login-form{
+	width: 100%;
+}
+
 input { 
-	width: 100%; 
+	/*width: 100%; */
 	margin-bottom: 10px; 
 	background: rgba(0,0,0,0.3);
 	border: none;
@@ -57,3 +67,101 @@ input {
 input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
 
 .error-msg{color:yellow; text-shadow: 0 0 5px; text-align:center;}
+
+.company-marker {
+	color: #fff;
+	text-shadow: 0 0 10px rgba(0,0,0,0.3);
+	letter-spacing:1px;
+	text-align:center;
+	font-weight:bold;
+	padding: 0 5px 15px 20px;
+}
+
+.full-height{
+	min-height: 100%;
+	height: 100%;
+	width: 100%;
+}
+
+.control{
+	padding: 0 20px 15px 20px;
+}
+
+.question-panel{
+	background:lightgrey;
+	padding-top:10px;
+	padding-bottom:10px;
+	/*position: relative;*/
+	overflow-y: scroll;
+	height:500px;
+	/*min-height: 100%;*/
+}
+
+.question{
+	font-family: "Arial Black", Gadget, sans-serif;
+}
+
+.options{
+
+}
+
+.footer{
+	text-align: center;
+	color: cornsilk;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 10px;
+}
+
+.padding-0{
+	padding-right:0;
+	padding-left:0;
+}
+
+.account-info{
+	color: #ceb65b; font-family: "Times New Roman", Times, serif; text-align:right;
+}
+
+.timer-clock{
+	text-align: center;
+	font-size: 20px;
+	color:yellow;
+	font-weight: bold;
+	text-shadow: 0 0 5px;
+}
+
+.timer-notification-style{
+	/*background-color: #10af0b;*/
+	padding: 10px;
+	color: white;
+	font-weight:bold;
+	text-align: center;
+}
+
+.close{
+	color:red;
+	font-weight:bold;
+	font-size: 50px;
+}
+
+.modal-header{
+	color:cornsilk;
+}
+
+.modal-body{
+	background:lightgrey;
+	padding-top:10px;
+	padding-bottom:10px;
+	font-family: "Arial Black", Gadget, sans-serif;
+}
+
+.portal-welcome{
+	padding-top:150px;
+	padding-bottom:10px;
+	font-size: 30px;
+	text-align: center;
+	text-decoration: dashed;
+	font-style: italic;
+	font-weight: bold;
+	font-family: "Comic Sans MS", Gadget, sans-serif;
+}
