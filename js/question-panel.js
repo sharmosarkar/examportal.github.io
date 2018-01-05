@@ -7,6 +7,8 @@ var TEST_TIME = 1;
 //global variables
 var clearTimer = false;
 
+
+
 function addQuestions(qsno, question, options){
     var panel = document.getElementById("question-panel");
     // Starting to Render Question
@@ -91,7 +93,6 @@ function getRadioVal(name) {
 
 function evaluateTest() {
     removeTimer();
-    renderWelcomeScreen();
     $("#myModal").modal();
     $("#modal-body-text").html("Well done! Your Exam Answers have been Successfully Submitted. <br>" +
         "Please contact Mr. Arindam Mitra for any clarifications.");
@@ -102,6 +103,7 @@ function evaluateTest() {
         submitted_ans = getRadioVal(qsno+"" );
         alert(qsno + ":::" + submitted_ans);
     }
+    renderWelcomeScreen();
 }
 
 
@@ -186,7 +188,6 @@ function renderWelcomeScreen(){
 function startTest(test_id){
     clearTimer = false;
     if (document.getElementById("portal-welcome") !== null)
-        // document.getElementById("question-panel").removeChild(document.getElementById("portal-welcome"));
         document.getElementById("portal-welcome").style.display = "none";
     renderTest(test_id);
     console.log(test_id);
@@ -194,3 +195,17 @@ function startTest(test_id){
     document.getElementById("time-notification").innerHTML = "Time Remaining for <br><b>"+test_id+"</b><br>";
     timer();
 }
+
+function seeResult(test_id){
+    console.log(test_id);
+    $('#result-modal').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+    $("#result-modal-title").html("Results of "+test_id);
+    $("#result-modal").modal();
+
+}
+
+
+

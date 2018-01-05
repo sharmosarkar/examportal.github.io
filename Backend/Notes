@@ -1,0 +1,5 @@
+sudo yum install -y mysql-devel
+sudo yum install gcc
+
+sudo pip install MySQL-python
+
