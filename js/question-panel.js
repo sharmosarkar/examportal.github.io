@@ -102,6 +102,7 @@ function renderSubmitButton(){
 
 
 function renderTest(test_number, level_number){
+    console.log("FROM RENDER TEST <><> USER ID ==== <><> "+localStorage.getItem("user_id"));
     var options = [];
     var optionTypes = [];
     var qsno;
