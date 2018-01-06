@@ -2,15 +2,19 @@
  * Created by Sharmo on 1/3/2018.
  */
 
-var TEST_TIME = 1;
+var TEST_TIME = 5;
 
 //global variables
 var clearTimer = false;
 
 
 
-function addQuestions(qsno, question, options){
+function addQuestions(qsno, question, options, questionType, optionTypes){
+    console.log(qsno);
+    console.log(options);
+    console.log(optionTypes);
     var panel = document.getElementById("question-panel");
+    var image = document.createElement("img");
     // Starting to Render Question
     var div = document.createElement("div");
     var classAttr = document.createAttribute("class");
@@ -20,9 +24,24 @@ function addQuestions(qsno, question, options){
     div.appendChild(text);
     var breakElement = document.createElement("br");
     div.appendChild(breakElement);
-    text = document.createTextNode(question);
-    div.appendChild(text);
+    if (questionType === 'T'){
+        text = document.createTextNode(question);
+        div.appendChild(text);
+    }
+    else if (questionType === 'I'){
+        image.src = question;
+        image.setAttribute("height", "250");
+        image.setAttribute("width", "500");
+        image.setAttribute("border", "1px solid #ddd");
+        image.setAttribute("border-radius", "4px");
+        image.setAttribute("padding", "5px");
+        div.appendChild(image);
+    }
     panel.appendChild(div);
+    if (questionType === 'I'){
+        breakElement = document.createElement("br");
+        panel.appendChild(breakElement);
+    }
     // End of Rendering Question
     // Starting to render options
     div = document.createElement("div");
@@ -33,13 +52,28 @@ function addQuestions(qsno, question, options){
     var i;
     var input;
     for (i = 0; i < options.length; i++) {
+        image = document.createElement("img");
         input = document.createElement("INPUT");
         input.setAttribute("type", "radio");
         input.name = qsno+"";
         input.value = i+1;
         div.appendChild(input);
-        text = document.createTextNode("   "+options[i]);
-        div.appendChild(text);
+        if (optionTypes[i] === 'T'){
+            text = document.createTextNode("   "+options[i]);
+            div.appendChild(text);
+        }
+        else if (optionTypes[i] === 'I'){
+            image.src = options[i];
+            image.setAttribute("height", "150");
+            image.setAttribute("width", "400");
+            image.setAttribute("border", "1px solid #ddd");
+            image.setAttribute("border-radius", "4px");
+            image.setAttribute("padding", "5px");
+            div.appendChild(image);
+            breakElement = document.createElement("br");
+            div.appendChild(breakElement);
+        }
+
         breakElement = document.createElement("br");
         div.appendChild(breakElement);
     }
@@ -61,19 +95,58 @@ function renderSubmitButton(){
 }
 
 
-function renderTest(test_id){
+function renderTest(test_number, level_number){
     var options = [];
+    var optionTypes = [];
     var qsno;
-    for (var i=0; i<5; i++){
-        qsno = i+1;
-        options[0]= 'momentum and impulse';
-        options[1] = 'energy and surface energy';
-        options[2] = 'momentum and angular momentum';
-        options[3] = 'force and surface tension';
-        var question = 'Which of the following pairs of physical quantities have the same dimensions?';
-        addQuestions(qsno, question, options);
-    }
-    renderSubmitButton()
+    var question;
+    var questionType;
+    // 1. get the questions from backend
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://ec2-52-27-78-103.us-west-2.compute.amazonaws.com/getquestions",
+        "method": "POST",
+        "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-cache",
+            "postman-token": "761cd66f-ad2d-d82c-5da7-0f797e658519"
+        },
+        "processData": false,
+        "data": "{\n\t\"user_id\" : \"1\",\n\t\"level\" : \""+level_number+"\",\n\t\"test\" : \""+test_number+"\"\n}"
+    };
+    $.ajax(settings).done(function (response) {
+        var question_data = JSON.parse(response)["question_data"];
+        console.log(question_data);
+        console.log(typeof  question_data);
+        // 2. Loop through the question_data
+        for (var i=0; i<question_data.length; i++){
+            qsno = i+1;
+            options[0]= question_data[i]["op1"];
+            optionTypes[0] = question_data[i]["op1Type"];
+            options[1] = question_data[i]["op2"];
+            optionTypes[1] = question_data[i]["op2Type"];
+            options[2] = question_data[i]["op3"];
+            optionTypes[2] = question_data[i]["op3Type"];
+            options[3] = question_data[i]["op4"];
+            optionTypes[3] = question_data[i]["op4Type"];
+            question = question_data[i]["qs"];
+            questionType = question_data[i]["qsType"];
+            addQuestions(qsno, question, options, questionType, optionTypes);
+        }
+        renderSubmitButton();
+    });
+
+    // for (var i=0; i<5; i++){
+    //     qsno = i+1;
+    //     options[0]= 'momentum and impulse';
+    //     options[1] = 'energy and surface energy';
+    //     options[2] = 'momentum and angular momentum';
+    //     options[3] = 'force and surface tension';
+    //     var question = 'Which of the following pairs of physical quantities have the same dimensions?';
+    //     addQuestions(qsno, question, options);
+    // }
+    // renderSubmitButton()
 }
 
 function getRadioVal(name) {
@@ -185,11 +258,13 @@ function renderWelcomeScreen(){
 }
 
 
-function startTest(test_id){
+function startTest(test_id, level_id){
     clearTimer = false;
     if (document.getElementById("portal-welcome") !== null)
         document.getElementById("portal-welcome").style.display = "none";
-    renderTest(test_id);
+    var test_number = test_id.split(" ")[1];
+    var level_number = level_id.split(" ")[1];
+    renderTest(test_number, level_number);
     console.log(test_id);
     document.getElementById("timer-notification-style").style.background = "#10af0b";
     document.getElementById("time-notification").innerHTML = "Time Remaining for <br><b>"+test_id+"</b><br>";
