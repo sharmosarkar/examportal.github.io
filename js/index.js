@@ -24,8 +24,10 @@ function login() {
             localStorage.setItem("user_id", json_data["user_id"]);
             window.location.href = '/portal.html';
         }
-        else if (msg === "Access Denied !!")
+        else if (msg === "Access Denied !!"){
             msg = "Please enter the correct Password !!";
-        document.getElementById("login-error-msg").innerHTML = msg;
+            document.getElementById("login-error-msg").innerHTML = msg;
+        }
+
     });
 }
