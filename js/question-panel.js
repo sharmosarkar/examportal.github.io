@@ -8,6 +8,12 @@ var TEST_TIME = 5;
 var clearTimer = false;
 
 
+function init() {
+    var name = localStorage.getItem("FName") + localStorage.getItem("LName");
+    document.getElementById("name").innerHTML = name;
+    console.log(localStorage.getItem("user_id"));
+}
+
 
 function addQuestions(qsno, question, options, questionType, optionTypes){
     console.log(qsno);
@@ -113,7 +119,7 @@ function renderTest(test_number, level_number){
             "postman-token": "761cd66f-ad2d-d82c-5da7-0f797e658519"
         },
         "processData": false,
-        "data": "{\n\t\"user_id\" : \"1\",\n\t\"level\" : \""+level_number+"\",\n\t\"test\" : \""+test_number+"\"\n}"
+        "data": "{\n\t\"user_id\" : \""+localStorage.getItem("user_id")+"\",\n\t\"level\" : \""+level_number+"\",\n\t\"test\" : \""+test_number+"\"\n}"
     };
     $.ajax(settings).done(function (response) {
         var question_data = JSON.parse(response)["question_data"];
