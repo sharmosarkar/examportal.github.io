@@ -9,7 +9,7 @@ var clearTimer = false;
 
 
 function init() {
-    var name = localStorage.getItem("FName") + localStorage.getItem("LName");
+    var name = localStorage.getItem("FName") +" " + localStorage.getItem("LName");
     document.getElementById("name").innerHTML = name;
     console.log(localStorage.getItem("user_id"));
 }
