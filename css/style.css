@@ -162,7 +162,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 }
 
 .result-modal{
-	height: 430px;
+	height: 450px;
 	width: 1100px;
 }
 
@@ -179,17 +179,46 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 
 #score{
 	border-style: solid;
-
+	font-family: "Brush Script MT", cursive;
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+	height : 400%;
+	min-height: 100px;
+	padding: 35px 2px 25px 2px;
 }
 
-#question-composition{
-	border-style: solid;
-
+#numerical-score{
+	font-weight: 600;
+	font-weight: bolder;
+	text-align: right;
+	font-size: 72px;
+	padding: 35px 2px 25px 2px;
 }
 
-#correctness-composition{
-	border-style: solid;
+#charts{
+	text-align: center;
+	font-size: large;
+}
 
+.incorrect-qs-header{
+	font-family: "Lucida Bright", Georgia, serif;
+	font-size: 20px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+}
+
+.soln-btn{
+	font-size: 12px;
+}
+
+.incorrect-qs{
+	overflow-y: scroll;
+	height: 200px;
 }
 
 .question-panel-img{
@@ -246,3 +275,36 @@ a.panel-heading {
 
 
 /** END ACCORDION STYLE **/
+
+/** BEGINNING OF PI-CHART STYLE **/
+
+#question-composition-chart {
+	width: 100%;
+	height: 200px;
+	font-size: 11px;
+}
+
+#correctness-composition-chart{
+	width: 100%;
+	height: 200px;
+	font-size: 11px;
+}
+
+.amcharts-pie-slice {
+	transform: scale(1);
+	transform-origin: 50% 50%;
+	transition-duration: 0.3s;
+	transition: all .3s ease-out;
+	-webkit-transition: all .3s ease-out;
+	-moz-transition: all .3s ease-out;
+	-o-transition: all .3s ease-out;
+	cursor: pointer;
+	box-shadow: 0 0 30px 0 #000;
+}
+
+.amcharts-pie-slice:hover {
+	transform: scale(1.1);
+	filter: url(#shadow);
+}
+
+/** END OF PI-CHART STYLE **/

@@ -2,10 +2,13 @@
  * Created by Sharmo on 1/3/2018.
  */
 
-var TEST_TIME = 5;
+var TEST_TIME = 1;
 
 //global variables
 var clearTimer = false;
+var correctAns = [];
+var questions = [];
+var options_2D = [];
 
 
 function init() {
@@ -96,8 +99,13 @@ function renderSubmitButton(){
     var classAttr = document.createAttribute("class");
     classAttr.value = "btn btn-primary btn-block btn-large";
     button.setAttributeNode(classAttr);
-    button.onclick = evaluateTest;
+    button.onclick = submitButtonOnclick
     panel.appendChild(button);
+
+    function submitButtonOnclick(){
+        endOfTest("Well done! Your Exam Answers have been Successfully Submitted. <br>" +
+            "Please contact Mr. Arindam Mitra for any clarifications.")
+    }
 }
 
 
@@ -139,6 +147,10 @@ function renderTest(test_number, level_number){
             optionTypes[3] = question_data[i]["op4Type"];
             question = question_data[i]["qs"];
             questionType = question_data[i]["qsType"];
+            // updating global variables (used for evaluation)
+            correctAns[i] = question_data[i]["correct"];
+            questions[i] = question;
+            options_2D[i] = {"1":options[0], "2":options[1], "3":options[2], "4":options[3]};
             addQuestions(qsno, question, options, questionType, optionTypes);
         }
         renderSubmitButton();
@@ -171,20 +183,23 @@ function getRadioVal(name) {
 }
 
 
-function evaluateTest() {
-    removeTimer();
-    $("#myModal").modal();
-    $("#modal-body-text").html("Well done! Your Exam Answers have been Successfully Submitted. <br>" +
-        "Please contact Mr. Arindam Mitra for any clarifications.");
-    var qsno;
-    var submitted_ans;
-    for (var i = 0; i<5; i++){
-        qsno = i+1;
-        submitted_ans = getRadioVal(qsno+"" );
-        alert(qsno + ":::" + submitted_ans);
-    }
-    renderWelcomeScreen();
-}
+// function evaluateTest() {
+//     removeTimer();
+//     $("#myModal").modal();
+//     $("#modal-body-text").html("Well done! Your Exam Answers have been Successfully Submitted. <br>" +
+//         "Please contact Mr. Arindam Mitra for any clarifications.");
+//     var qsno;
+//     var submitted_ans;
+//     for (var i = 0; i<questions.length; i++){
+//         qsno = i+1;
+//         submitted_ans = getRadioVal(qsno+"" );
+//         alert(questions[i] + "\n" +
+//             submitted_ans + ":::" + correctAns[i] + "\n"+
+//             options_2D[i][submitted_ans] + ":::" +
+//             options_2D[i][correctAns[i].replace("Op","").replace("op","")]);
+//     }
+//     renderWelcomeScreen();
+// }
 
 
 function timer() {
@@ -225,12 +240,19 @@ function timer() {
             removeTimer();
             document.getElementById("timer-clock").innerHTML = "";//"EXPIRED";
             renderWelcomeScreen();
-            $("#myModal").modal();
-            $("#modal-body-text").html("Sorry! You have run out of time and the Exam has been submitted." +
+            endOfTest("Sorry! You have run out of time and the Exam has been submitted." +
                 "<br> Please contact Mr. Arindam Mitra for any clarifications.");
         }
     }, 1000);
 
+}
+
+
+function endOfTest(testToDisplayOnModal){
+    removeTimer();
+    $("#myModal").modal();
+    $("#modal-body-text").html(testToDisplayOnModal);
+    evaluateTest(); // this function is in file question-panel-result.js
 }
 
 function removeTimer(){
@@ -278,16 +300,16 @@ function startTest(test_id, level_id){
     timer();
 }
 
-function seeResult(test_id){
-    console.log(test_id);
-    $('#result-modal').modal({
-        backdrop: 'static',
-        keyboard: false
-    });
-    $("#result-modal-title").html("Results of "+test_id);
-    $("#result-modal").modal();
-
-}
+// function seeResult(test_id){
+//     console.log(test_id);
+//     $('#result-modal').modal({
+//         backdrop: 'static',
+//         keyboard: false
+//     });
+//     $("#result-modal-title").html("Results of "+test_id);
+//     $("#result-modal").modal();
+//
+// }
 
 
 
