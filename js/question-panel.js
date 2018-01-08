@@ -2,19 +2,28 @@
  * Created by Sharmo on 1/3/2018.
  */
 
-var TEST_TIME = 1;
+var TEST_TIME = 5;
 
 //global variables
 var clearTimer = false;
 var correctAns = [];
 var questions = [];
 var options_2D = [];
+var topics = [];
+var qs_topic_composition = {};
 
 
 function init() {
     var name = localStorage.getItem("FName") +" " + localStorage.getItem("LName");
     document.getElementById("name").innerHTML = name;
     console.log(localStorage.getItem("user_id"));
+}
+
+function logoutOnclick() {
+    localStorage.setItem("FName", "");
+    localStorage.setItem("LName", "");
+    localStorage.setItem("user_id", "");
+    window.location.href = '/index.html';
 }
 
 
@@ -99,7 +108,7 @@ function renderSubmitButton(){
     var classAttr = document.createAttribute("class");
     classAttr.value = "btn btn-primary btn-block btn-large";
     button.setAttributeNode(classAttr);
-    button.onclick = submitButtonOnclick
+    button.onclick = submitButtonOnclick;
     panel.appendChild(button);
 
     function submitButtonOnclick(){
@@ -110,6 +119,7 @@ function renderSubmitButton(){
 
 
 function renderTest(test_number, level_number){
+    invalidatePresiousScores(); // this function is in question-panel-result.js
     console.log("FROM RENDER TEST <><> USER ID ==== <><> "+localStorage.getItem("user_id"));
     var options = [];
     var optionTypes = [];
@@ -150,6 +160,13 @@ function renderTest(test_number, level_number){
             // updating global variables (used for evaluation)
             correctAns[i] = question_data[i]["correct"];
             questions[i] = question;
+            topics[i] = question_data[i]["Topic"];
+            if (qs_topic_composition.hasOwnProperty(topics[i])){
+                qs_topic_composition[topics[i]] += 1;
+            }
+            else{
+                qs_topic_composition[topics[i]] = 1;
+            }
             options_2D[i] = {"1":options[0], "2":options[1], "3":options[2], "4":options[3]};
             addQuestions(qsno, question, options, questionType, optionTypes);
         }
@@ -239,7 +256,7 @@ function timer() {
             clearInterval(x);
             removeTimer();
             document.getElementById("timer-clock").innerHTML = "";//"EXPIRED";
-            renderWelcomeScreen();
+            // renderWelcomeScreen();
             endOfTest("Sorry! You have run out of time and the Exam has been submitted." +
                 "<br> Please contact Mr. Arindam Mitra for any clarifications.");
         }
@@ -253,6 +270,7 @@ function endOfTest(testToDisplayOnModal){
     $("#myModal").modal();
     $("#modal-body-text").html(testToDisplayOnModal);
     evaluateTest(); // this function is in file question-panel-result.js
+    renderWelcomeScreen();  // this function is in file question-panel.js
 }
 
 function removeTimer(){

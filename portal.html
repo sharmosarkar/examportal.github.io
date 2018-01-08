@@ -26,7 +26,8 @@
 
 <body onload="init()">
 
-    <div class="container-fluid">
+    <div class="wrapper">
+    <div class="container-fluid header">
         <div class="row bgcolor ">
             <div class="col-sm-6 company-marker">
                 <h1 class="pull-left">Arindam Mitra's Exam Portal</h1>
@@ -36,11 +37,22 @@
                 <div id = "timer-clock" class="timer-clock"> </div>
             </div>
             <div class="col-sm-4 account-info">
-                <h2 class="pull-right" id="name">FirstName LastName</h2>
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h2 class="" id="name">FirstName LastName</h2>
+                    </div>
+                    <div class="col-sm-2">
+                        <br>
+                        <span style="text-align: center" onclick="logoutOnclick();">
+                           <a> <img src="img/logout_icon.png" style="height: 30px; width: 30px;"></a>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+    <div class="inner">
     <div class="container-fluid">
         <div class="row">
             <!-- Left Panel -->
@@ -181,7 +193,7 @@
                 </div>
             </div>
         </div>
-
+    </div>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
@@ -228,7 +240,7 @@
                                 <div id="question-composition-chart">
 
                                 </div>
-                                Topicwise correctness <br>
+                                Topicwise Correctly Answered Questions <br>
                                 <div id="correctness-composition-chart">
 
                                 </div>
@@ -251,7 +263,8 @@
 
 
     <!-- Footer -->
-    <nav class="navbar navbar-bottom footer bgcolor">
+    <!--<nav class="navbar navbar-bottom footer bgcolor">-->
+        <div class="footer bgcolor">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
@@ -259,7 +272,9 @@
                 </div>
             </div>
         </div>
-    </nav>
+        </div>
+    <!--</nav>-->
+    </div>
 
 </body>
 </html>
