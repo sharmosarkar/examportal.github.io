@@ -102,7 +102,7 @@ patsy==0.4.0
 pdfminer==20140328
 pep8==1.7.0
 pickleshare==0.5
-Pillow==3.1.1
+Pillow==8.1.1
 ply==3.8
 prettytable==0.7.2
 psclient==2.0
