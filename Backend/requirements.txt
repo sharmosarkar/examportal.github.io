@@ -107,7 +107,7 @@ ply==3.8
 prettytable==0.7.2
 psclient==2.0
 psutil==4.1.0
-py==1.4.31
+py==1.10.0
 py4j==0.10.6
 pyasn1==0.3.7
 pycosat==0.6.1
